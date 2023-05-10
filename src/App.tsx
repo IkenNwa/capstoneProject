@@ -1,10 +1,10 @@
-import Login from "./views/Login"
 import "./App.css"
+import ChatterRoutes from "./router"
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      <ChatterRoutes />
     </div>
   )
 }

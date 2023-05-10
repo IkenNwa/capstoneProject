@@ -4,59 +4,10 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
-.loginPage{
+body{
   display: flex;
   flex-direction: column;
   height: 100svh;
   align-items: center;
   justify-content: center;
-}
-.logo{
-  width: 40px;
-  display: flex;
-  flex-direction: row;
-  height: fit-content;
-  align-items: center;
-  justify-content: center;
-}
-.loginContainer{
-  display: flex;
-  flex-direction: column;
-  height: max-content;
-  background: #FFEFEF;
-  padding: 20px;
-  border-radius: 25px;
-}
-.formContainer{
-  display: flex;
-  flex-direction: column;
-  height: max-content;
-  align-items: center;
-  justify-content: center;
-}
-.formContainer input{
-  padding: 9px;
-  margin-block: 10px;
-}
-.formContainer button{
-  background: ;
-}
-.divider{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  height: fit-content;
-  justify-content: center;
-}
-.divider hr {
-  width: 70%;
-  margin-inline: 20px;
-}
-.otherLogin{
-  display: flex;
-  flex-direction: row;
-  height: max-content;
-  align-items: center;
-  justify-content: space-around;
 }
