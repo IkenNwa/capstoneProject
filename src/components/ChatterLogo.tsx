@@ -15,7 +15,7 @@ function ChatterLogo() {
   return (
     <div className={classes.logo}>
         <img src="/Chatter2Logo2.svg" alt="Chatter-Logo" />
-        <p>Chatter</p>
+        <h4>Papyrus</h4>
     </div>
   )
 }

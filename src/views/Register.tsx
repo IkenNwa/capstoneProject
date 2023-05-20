@@ -21,6 +21,7 @@ const useStyles = createUseStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    height: "100svh",
   },
   registerContainer: {
     display: "flex",

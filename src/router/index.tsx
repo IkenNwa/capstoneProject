@@ -5,6 +5,7 @@ import NotFound from "../views/NotFound";
 import RegisterWelcome from "../views/RegisterWelcome";
 import { AnimatePresence } from "framer-motion";
 import Register from "../views/Register";
+import Dashboard from "../views/Dashboard";
 function ChatterRoutes() {
   const location = useLocation();
   return (
@@ -14,6 +15,11 @@ function ChatterRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterWelcome />}/>
         <Route path="/register/:type" element={<Register />} />
+        <Route path="/u/:type" element={<Dashboard />} />
+        {/* <Route path="/u/:type/" element={<Home />} />
+        <Route path="/u/:type/" element={<Profile />} />
+        <Route path="/u/:type/" element={<Settings />} /> */}
+
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
