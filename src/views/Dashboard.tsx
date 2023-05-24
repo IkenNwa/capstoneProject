@@ -1,6 +1,8 @@
 import Navigation from "../components/Navigation"
 
+
 function Dashboard() {
+
   return (
     <div className="disp">
       <div className="main">

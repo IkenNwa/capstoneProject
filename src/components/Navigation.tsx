@@ -10,15 +10,17 @@ const useStyles = createUseStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-evenly",
-    backgroundColor: "#FFEFEF",
+    backgroundColor: "#fff",
     padding: "0 5rem",
     height: "100svh",
+    borderTop: "1px solid #f0f0f0",
     "@media (max-width: 768px)": {
       flexDirection: "row",
       justifyContent: "center",
       padding: "2rem 0",
       height: "10svh",
       width: "100%",
+      borderTop: "none",
     },
     "& ul": {
       display: "column",
@@ -38,7 +40,6 @@ const useStyles = createUseStyles({
       },
       "& .pro": {
         backgroundColor: "#C80028",
-        color: "#fff",
         fontWeight: "light",
         borderRadius: "5px",
       },
@@ -46,14 +47,15 @@ const useStyles = createUseStyles({
         margin: "0.5rem 0",
         padding: "0.5rem 1rem",
         borderRadius: "5px",
-        backgroundColor: "#FFF",
         border: "1px solid #C80028",
-        cursor: "pointer",
+        backgroundColor: "#C80028",
         width: "70px",
         alignItems: "center",
         justifyContent: "center",
         display: "flex",
         height: "fit-content",
+        textAlign: "center",
+        cursor: "pointer",
         //mobile
         "@media (max-width: 768px)": {
           margin: "0 1rem",
@@ -65,7 +67,7 @@ const useStyles = createUseStyles({
         "& a": {
           textDecoration: "none",
           fontWeight: "light",
-          color: "#44000E",
+          color: "#ffefef",
         },
       },
     },
@@ -84,7 +86,7 @@ function Navigation() {
           </Link>
         </li>
         <li>
-          <Link to="/dashboard">
+          <Link to="/u/dashboard">
             <RxDashboard />
           </Link>
         </li>

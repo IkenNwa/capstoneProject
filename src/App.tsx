@@ -1,12 +1,12 @@
 import "./App.css";
-import ChatterRoutes from "./router";
+import Editor from "./views/Editor";
 
 function App() {
 
 
   return (
     <div className="App">
-      <ChatterRoutes />
+      <Editor />
     </div>
   );
 }
