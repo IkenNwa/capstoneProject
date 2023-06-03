@@ -19,16 +19,19 @@ const registerW = createUseStyles({
       display: "flex",
       flexDirection: "row",
       height: "fit-content",
-      alignItems: "space-around",
+      alignItems: "center",
       justifyContent: "center",
       marginBlockStart: "2rem",
       "& a": {
         textDecoration: "none",
         cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         "& .item": {
           height: "fit-content",
           backgroundColor: "#FFEFEF",
-          width: "fit-content",
+          width: "40%",
           marginInline: "2rem",
           padding: "2rem 1rem",
           display: "flex",
@@ -40,13 +43,33 @@ const registerW = createUseStyles({
           color: "#C80028",
           textDecoration: "none",
           "& img": {
-            width: "120px",
+            width: "100%",
             marginBlockEnd: "1rem",
           },
         },
       },
     },
   },
+  "@media (max-width: 575px)": {
+    register: {
+      "& .select": {
+        flexDirection: "column",
+        "& a": {
+          marginBlockStart: "1rem",
+          "& .item": {
+            width: "80%",
+            marginInline: "0",
+            padding: "1rem 0.5rem",
+            "& img": {
+              width: "50%",
+              marginBlockEnd: "0.5rem",
+            },
+          },
+        },
+      },
+    },
+  },
+
 });
 
 function RegisterWelcome() {

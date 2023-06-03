@@ -1,14 +1,14 @@
-import Navigation from "../components/Navigation"
+import Header from "../components/Header"
 
 
 function Dashboard() {
 
   return (
-    <div className="disp">
-      <div className="main">
+    <div className="main">
+      <Header />
+      <div>
         <h1>Dashboard</h1>
       </div>
-      <Navigation />
     </div>
   );
 }
