@@ -1,12 +1,14 @@
 import "./App.css";
-import Editor from "./views/Editor";
+import Feed from "./views/Feed";
+// import Post from "./views/Post";
 
 function App() {
 
 
   return (
     <div className="App">
-      <Editor />
+      <Feed />
+      {/* <Post /> */}
     </div>
   );
 }

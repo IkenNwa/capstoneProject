@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, getAuth, signInWithRedirect, getRedirectResult, FacebookAuthProvider, signOut } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithRedirect,
+  getRedirectResult,
+  FacebookAuthProvider,
+  signOut,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 const provider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,11 +33,12 @@ const auth = getAuth();
 
 
 export {
-    app,
-    provider,
-    auth,
-    facebookProvider,
-    signInWithRedirect,
-    getRedirectResult,
-    signOut
-}
+  app,
+  provider,
+  auth,
+  facebookProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  signOut,
+  createUserWithEmailAndPassword,
+};

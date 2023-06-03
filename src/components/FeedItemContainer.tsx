@@ -32,7 +32,7 @@ const useStyles = createUseStyles({
 function FeedItemContainer() {
     const classes = useStyles();
   return (
-    <div className={classes.all}>
+    <div className={classes.all }>
         <FeedItem />
         <FeedItem />
         <FeedItem />

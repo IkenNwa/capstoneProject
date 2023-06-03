@@ -12,8 +12,9 @@ import {
   getRedirectResult,
   provider,
   signInWithRedirect,
+  createUserWithEmailAndPassword,
 } from "../config";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useStyles = createUseStyles({
   register: {
@@ -112,6 +113,9 @@ const useStyles = createUseStyles({
 
 function Register() {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cPassword, setCPassword] = useState("");
 
   const googleLogin = () => {
     console.log("Google Login");
@@ -120,7 +124,19 @@ function Register() {
   const facebookLogin = () => {
     console.log("Facebook Login");
     signInWithRedirect(auth, provider);
-    };
+  };
+  const emailLogin = (email:string, password:string) => {
+    console.log("Email Login");
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   //Get Redirect Result
   useEffect(() => {
@@ -148,10 +164,20 @@ function Register() {
       <ChatterLogo />
       <div className={classes.registerContainer}>
         <form>
-          <input type="email" placeholder="E-Mail" />
-          <input type="password" placeholder="Password" />
-          <input type="password" placeholder="Confirm Password" />
-          <button type="submit">Register</button>
+          <input
+            type="email"
+            placeholder="E-Mail"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input type="password" placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+           />
+          <input type="password" placeholder="Confirm Password" 
+            onChange={(e) => setCPassword(e.target.value)}
+          />
+          <button type="submit"
+          onClick={() => emailLogin(email, password)}
+          >Register</button>
         </form>
         <div className="divider">
           <hr /> OR <hr />
@@ -161,9 +187,7 @@ function Register() {
             <img src={GLogo} alt="Google" />
             <p>Google</p>
           </div>
-          <div className="item"
-            onClick={facebookLogin}
-          >
+          <div className="item" onClick={facebookLogin}>
             <img src={FLogo} alt="Facebook" />
             <p>Facebook</p>
           </div>

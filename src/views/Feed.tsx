@@ -4,10 +4,12 @@ import Header from "../components/Header";
 
 function Feed() {
   return (
-    <div className="disp">
+    <>
       <Header />
+      <div className="max-margin">
       <FeedItemContainer />
-    </div>
+      </div>
+    </>
   );
 }
 

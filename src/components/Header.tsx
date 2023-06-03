@@ -9,10 +9,12 @@ const useStyles = createUseStyles({
         alignItems: "center",
         justifyContent: "space-between",
         width: "100%",
-        height: "min-content",
+        minHeight: '50px',
+        // height: "min-content",
         padding: "1rem",
         backgroundColor: "#fff",
         position: 'fixed',
+        top: 0,
     },
 });
 
