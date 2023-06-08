@@ -8,7 +8,8 @@ const useStyles = createUseStyles({
     justifyContent: "center",
     width: "70%",
     height: "fit-content",
-    backgroundColor: "#D9D9D9",
+    backgroundColor: "#FFEFEF",
+    color: "#44000E",
     borderRadius: "0.5rem",
     padding: "0.5rem",
     "& input": {

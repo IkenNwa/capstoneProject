@@ -31,6 +31,9 @@ const usestyles = createUseStyles({
     width: "50%",
     fontSize: "1.2rem",
     overflow: "scroll",
+    "& img": {
+      maxWidth: "100%",
+    },
   },
   floating: {
     position: "absolute",
@@ -88,7 +91,9 @@ const usestyles = createUseStyles({
 function Editor() {
   const classes = usestyles();
 
-  const [markdown, setMarkdown] = useState("### Preview here...");
+  const [markdown, setMarkdown] = useState("");
+
+  // Make floating bar follow the cursor in text area
 
   return (
     <div className={classes.editor}>
@@ -98,17 +103,20 @@ function Editor() {
         <textarea
           className={classes.textarea}
           onChange={(e) => setMarkdown(e.target.value)}
+          value={markdown}
+          placeholder="Start Typing Here..."
+          autoFocus
         ></textarea>
         <div className={classes.floating}>
           <button><RiSaveLine /></button>
           <button><RiCloseLine /></button>
           <button><RiDeleteBin2Line /></button>
         </div>
-        <FloatingBar />
+        <FloatingBar mark={markdown} setMark={setMarkdown} />
       </>
 
       <div className={classes.preview}>
-        <ReactMarkdown>{markdown}</ReactMarkdown>
+        <ReactMarkdown>{markdown ? markdown : "### Preview Here..."}</ReactMarkdown>
       </div>
     </div>
   );
