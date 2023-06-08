@@ -3,14 +3,17 @@ import { RiCloseLine, RiDeleteBin2Line, RiSaveLine } from "react-icons/ri";
 import { createUseStyles } from "react-jss";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import Header from "../components/Header";
+import FloatingBar from "../components/FloatingBar";
 
 const usestyles = createUseStyles({
   editor: {
     display: "flex",
     flexDirection: "row",
-    height: "100vh",
-    width: "100vw",
-    border: "1px solid black",
+    height: "83svh",
+    width: "100%",
+    border: "none",
+    overflow: "hidden",
+    marginTop: "6.9rem",
   },
   textarea: {
     height: "100%",
@@ -56,6 +59,7 @@ const usestyles = createUseStyles({
   "@media (max-width: 650px)":{
     editor: {
       flexDirection: "column",
+      marginTop: "7rem",
     },
     textarea:{
       height: "50%",
@@ -100,6 +104,7 @@ function Editor() {
           <button><RiCloseLine /></button>
           <button><RiDeleteBin2Line /></button>
         </div>
+        <FloatingBar />
       </>
 
       <div className={classes.preview}>
