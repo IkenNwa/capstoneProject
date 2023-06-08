@@ -125,17 +125,14 @@ function Register() {
     console.log("Facebook Login");
     signInWithRedirect(auth, provider);
   };
-  const emailLogin = (email:string, password:string) => {
+  const emailLogin = (email: string, password: string) => {
+    console.log(email);
+    console.log(password);
+    
+    
     console.log("Email Login");
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+      
   };
 
   //Get Redirect Result
@@ -167,17 +164,24 @@ function Register() {
           <input
             type="email"
             placeholder="E-Mail"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input type="password" placeholder="Password"
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
-           />
-          <input type="password" placeholder="Confirm Password" 
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={cPassword}
             onChange={(e) => setCPassword(e.target.value)}
           />
-          <button type="submit"
-          onClick={() => emailLogin(email, password)}
-          >Register</button>
+          <button type="submit" onClick={() => emailLogin(email, password)}>
+            Register
+          </button>
         </form>
         <div className="divider">
           <hr /> OR <hr />

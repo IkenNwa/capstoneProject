@@ -41,16 +41,15 @@ body{
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 2em;
 }
 .article {
   margin-top: 10rem;
-  padding-inline: 2em;
+  padding-inline: 2rem;
   line-height: 1.6;
 }
 @media (min-width: 768px){
 .article{
-  padding-inline: 4em;
+  padding-inline: 4rem;
   width: 100%;
 }
 
@@ -65,14 +64,14 @@ body{
   border: none;
 }
 .profile{
-  padding-inline: 1em;
+  padding-inline: 1rem;
   display: flex;
 }
 .viewer{
   display: flex;
   width: 100%;
   align-items: center;
-  padding-inline: 2em;
+  padding-inline: 2rem;
   justify-content: space-between;
 }
 

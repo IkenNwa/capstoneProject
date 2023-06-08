@@ -9,6 +9,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 const provider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 // TODO: Add SDKs for Firebase products that you want to use
@@ -28,6 +29,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 const auth = getAuth();
 
 
@@ -41,4 +43,5 @@ export {
   getRedirectResult,
   signOut,
   createUserWithEmailAndPassword,
+  db,
 };
