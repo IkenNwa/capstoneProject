@@ -1,4 +1,3 @@
-import React from "react";
 import { createUseStyles } from "react-jss";
 
 const style = createUseStyles({
@@ -33,66 +32,63 @@ const style = createUseStyles({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CreateHeader: React.FC = (props: {
-  active: boolean;
-  mark: string;
-  setActive: any;
-  setMark: any;
-}): JSX.Element => {
+const CreateHeader = ({active, mark, setActive, setMark}:any) => {
   const classes = style();
-  if (props.active) {
+  if (active) {
     return (
       <ul className={classes.header}>
         <li
           onClick={() => {
-            props.setActive(false);
-            props.setMark(props.mark + `\n# `);
+            setActive(false);
+            setMark(mark + `\n# `);
           }}
         >
           Header 1
         </li>
         <li
           onClick={() => {
-            props.setActive(false);
-            props.setMark(props.mark + `\n## `);
+            setActive(false);
+            setMark(mark + `\n## `);
           }}
         >
           Header 2
         </li>
         <li
           onClick={() => {
-            props.setActive(false);
-            props.setMark(props.mark + `\n### `);
+            setActive(false);
+            setMark(mark + `\n### `);
           }}
         >
           Header 3
         </li>
         <li
           onClick={() => {
-            props.setActive(false);
-            props.setMark(props.mark + `\n#### `);
+            setActive(false);
+            setMark(mark + `\n#### `);
           }}
         >
           Header 4
         </li>
         <li
           onClick={() => {
-            props.setActive(false);
-            props.setMark(props.mark + `\n##### `);
+            setActive(false);
+            setMark(mark + `\n##### `);
           }}
         >
           Header 5
         </li>
         <li
           onClick={() => {
-            props.setActive(false);
-            props.setMark(props.mark + `\n###### `);
+            setActive(false);
+            setMark(mark + `\n###### `);
           }}
         >
           Header 6
         </li>
       </ul>
     );
+  } else {
+    return null;
   }
 };
 

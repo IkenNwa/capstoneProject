@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RiImage2Fill, RiLinkM } from "react-icons/ri";
 import { RxPlus } from "react-icons/rx";
 import { createUseStyles } from "react-jss";
@@ -10,7 +11,7 @@ const styles = createUseStyles({
   floating: {
     position: "fixed",
     top: "50vh",
-    right: "0",
+    right: "50vw",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -33,10 +34,7 @@ const styles = createUseStyles({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const FloatingBar: React.FC = (props: {
-  mark: string;
-  setMark: any;
-}): JSX.Element => {
+const FloatingBar = ({mark, setMark}:any) => {
   const classes = styles();
   const [showHeader, setShowHeader] = useState(false);
   const [showLink, setShowLink] = useState(false);
@@ -72,21 +70,21 @@ const FloatingBar: React.FC = (props: {
       </li>
       <CreateHeader
         active={showHeader}
-        mark={props.mark}
+        mark={mark}
         setActive={setShowHeader}
-        setMark={props.setMark}
+        setMark={setMark}
       />
       <AddImage
         active={showImage}
-        mark={props.mark}
+        mark={mark}
         setActive={setShowImage}
-        setMark={props.setMark}
+        setMark={setMark}
       />
       <CreateLink
         active={showLink}
-        mark={props.mark}
+        mark={mark}
         setActive={setShowLink}
-        setMark={props.setMark}
+        setMark={setMark}
       />
     </ul>
   );

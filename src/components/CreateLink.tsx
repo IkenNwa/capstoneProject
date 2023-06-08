@@ -41,16 +41,11 @@ const usestyles = createUseStyles({
     },
   },
 });
-const CreateLink: React.FC = (props: {
-  active: boolean;
-  mark: string;
-  setMark: any;
-  setActive: any;
-}) => {
+const CreateLink = ({active, mark, setMark, setActive}:any) => {
   const [link, setLink] = useState("");
   const [alt, setAlt] = useState("");
   const classes = usestyles();
-  if (props.active) {
+  if (active) {
     return (
       <div className={classes.container}>
         <input
@@ -65,16 +60,17 @@ const CreateLink: React.FC = (props: {
         />
         <button
           onClick={() => {
-            props.setActive(false);
-            props.setMark(props.mark + `\n[${alt}](${link})`);
+            setActive(false);
+            setMark(mark + `\n[${alt}](${link})`);
           }}
         >
           Insert
         </button>
       </div>
     );
+  } else {
+    return null;
   }
-  return;
 };
 
 export default CreateLink;

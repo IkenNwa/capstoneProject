@@ -41,7 +41,8 @@ const useStyles = createUseStyles({
     },
 });
 
-const AddImage: React.FC<AddImageProps> = ({ active, mark, setMark, setActive }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AddImage = ({ active, mark, setMark, setActive }:any) => {
     const classes = useStyles();
     const [link, setLink] = useState("");
     const [alt, setAlt] = useState("");
@@ -59,6 +60,8 @@ const AddImage: React.FC<AddImageProps> = ({ active, mark, setMark, setActive })
             >Insert</button>
         </div>
         );
+    }else{
+        return null;
     }
 };
 
