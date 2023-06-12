@@ -1,44 +1,47 @@
-import { Link } from "react-router-dom";
-import { createUseStyles } from "react-jss";
-import ChatterLogo from "../components/ChatterLogo";
 import { motion } from "framer-motion";
-
-const landingStyles = createUseStyles({
-  landing: {
-    display: "flex",
-    height: "inherit",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    "& a": {
-      "& button": {
-        backgroundColor: "red",
-        outline: "none",
-        padding: "0.5rem",
-        color: "#fff",
-        border: "none",
-        borderRadius: "5px",
-      },
-    },
-  },
-});
+import ChatterLogo from "../components/ChatterLogo";
+import FeedItemContainer from "../components/FeedItemContainer";
+import { Link } from "react-router-dom";
 
 function Landing() {
-  const style = landingStyles();
   return (
     <motion.main
-      className={style.landing}
-      initial={{ opacity: 0, }}
-      animate={{ opacity: 1,  height: "100svh" }}
-      exit={{ opacity: 0, height: "0svh", }}
+      className="disp"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <ChatterLogo />
-      <h1>This is the Landing Page</h1>
-      <Link to="/login">
-        <button>Login here</button>
-      </Link>
+      <section className="sect">
+        <ChatterLogo />
+        <Link to="login" ><button className="btn">Login</button></Link>
+        <h1># Welcome to Chatter</h1>
+        <p>Secure, Reliable, Intuitive</p>
+      </section>
+      <section className="sect">
+        <h3>About Chatter</h3>
+        <article>
+          Chatter is a Medium/Hashnode Clone web app, created to ease the
+          transmission of datat across the internert
+        </article>
+      </section>
+      <section className="sect">
+        <h3>Testimonies</h3>
+        <div>
+          <div>
+            <ChatterLogo />
+            <div>
+              <h5>Ada Lovelace</h5>
+              <p>Pioneer Programmer</p>
+            </div>
+          </div>
+          <p>Such a wonder in an app</p>
+        </div>
+      </section>
+      <section className="sect">
+        <h2>Trending</h2>
+        <FeedItemContainer />
+      </section>
     </motion.main>
   );
 }

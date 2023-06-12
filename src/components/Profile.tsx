@@ -1,6 +1,9 @@
+import { signOut } from "firebase/auth";
 import { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { createUseStyles } from "react-jss"
+import { useNavigate } from "react-router";
+import { auth } from "../config";
 
 
 const useStyles = createUseStyles({
@@ -17,7 +20,7 @@ const useStyles = createUseStyles({
         cursor: "pointer",
     },
     pop:{
-        backgroundColor: "white",
+        backgroundColor: "#FFEFEF",
         position: "absolute",
         width: "150px",
         zIndex: "999",
@@ -28,32 +31,38 @@ const useStyles = createUseStyles({
         borderRadius: "5px",
         boxShadow: "0px 0px 10px #878787",
         "& li":{
-            marginBlockEnd: "10px",
             padding: "8px",
-        }
+            cursor: "pointer",
+            "&:hover":{
+              backgroundColor: "#C80028",
+              borderRadius: "3px",
+              color: "#FFEFEF",
+            }
+        },
     }
 })
 
 
 function Profile() {
     const classes = useStyles();
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        signOut(auth);
+    }
 
   return (
     <div className="profile">
       <div className={classes.profile} onClick={() => setShow(!show)}>
-        {show ? (<RiCloseCircleLine />) : "AK"}
+        {show ? <RiCloseCircleLine /> : "AK"}
       </div>
       {show ? (
         <>
           <ul className={classes.pop}>
-            <li>Home</li>
-            <hr />
-            <li>Dashboard</li>
-            <hr />
-            <li>Account</li>
-            <hr />
-            <li>Log-Out</li>
+            <li onClick={() => navigate("/u/dashboard")}>Home</li>
+            <li onClick={() => navigate("/u/settings")}>Account</li>
+            <li onClick={handleLogout}>Log-Out</li>
           </ul>
         </>
       ) : (

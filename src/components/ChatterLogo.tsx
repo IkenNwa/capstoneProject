@@ -1,4 +1,5 @@
 import { createUseStyles } from "react-jss"
+import { useNavigate } from "react-router"
  const logoStyle= createUseStyles({
   logo : {
     display: "flex",
@@ -29,8 +30,15 @@ import { createUseStyles } from "react-jss"
 
 function ChatterLogo() {
   const classes = logoStyle()
+  const navigate = useNavigate()
   return (
-    <div className={classes.logo}>
+    <div className={classes.logo} 
+    onClick={
+      () => {
+        navigate("/")
+      }
+    }
+    >
         <img src="/Chatter2Logo2.svg" alt="Chatter-Logo" />
         <h4>Chatter</h4>
     </div>

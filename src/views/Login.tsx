@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
-import GLogo from "../assets/Google.svg";
-import FLogo from "../assets/Facebook.svg";
 import ChatterLogo from "../components/ChatterLogo";
 import {motion} from 'framer-motion'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import OtherLogin from "../components/OtherLogin";
+import { useEffect, useState } from "react";
+import { getRedirectResult, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config";
 
 const useStyles = createUseStyles({
   loginPage: {
@@ -108,44 +111,81 @@ const useStyles = createUseStyles({
   },
 });
 
-function Login() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function Login({user, setUser}: any) {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    signInWithEmailAndPassword( auth, email, password)
+    .then((result) => {
+      // Signed in
+      setUser(result.user);
+      // ...
+    })
+    .catch((error) => {
+      console.log(error.code, error.message);
+    });
+  }
+
+
+
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) {
+          console.log(result.user);
+          setUser(result.user);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
-    <motion.main
-      className={classes.loginPage}
-      initial={{ opacity: 0, }}
-      animate={{ opacity: 1, height:"100svh" }}
-      exit={{ opacity: 0, height:"0svh", }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-    >
-      <ChatterLogo />
-      <div className={classes.loginContainer}>
-        <form className="formContainer">
-          <input type="email" placeholder="E-Mail" />
-          <input type="password" placeholder="Password" />
-          <button type="submit">Login</button>
-        </form>
-        <div className="divider">
-          <hr /> OR <hr />
-        </div>
-        <div className="otherLogin">
-          <div className="item">
-            <img src={GLogo} alt="Google-Logo" />
-            <p>Google</p>
+    <>
+      {user ? (
+       <Navigate to="/u/dashboard" />
+      ) : (
+        <motion.main
+          className={classes.loginPage}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, height: "100svh" }}
+          exit={{ opacity: 0, height: "0svh" }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <ChatterLogo />
+          <div className={classes.loginContainer}>
+            <form className="formContainer">
+              <input type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="E-Mail"  />
+              <input 
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password" />
+              <button type="submit" onClick={handleLogin}>Login</button>
+            </form>
+            <div className="divider">
+              <hr /> OR <hr />
+            </div>
+            <OtherLogin />
+            <p className="registerLink">
+              Need an account?{" "}
+              <Link to="/register">
+                <span>Register</span>
+              </Link>
+            </p>
           </div>
-          <div className="item">
-            <img src={FLogo} alt="Facebook-Logo" />
-            <p>Facebook</p>
-          </div>
-        </div>
-        <p className="registerLink">
-          Need an account?{" "}
-          <Link to="/register">
-            <span>Register</span>
-          </Link>
-        </p>
-      </div>
-    </motion.main>
+        </motion.main>
+      )}
+    </>
   );
 }
 

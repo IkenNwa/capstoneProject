@@ -1,20 +1,17 @@
 // Date: 9/4/2021
 // Note: React Router v6
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import ChatterLogo from "../components/ChatterLogo";
 import { createUseStyles } from "react-jss";
 import { motion } from "framer-motion";
-import GLogo from "../assets/google.svg";
-import FLogo from "../assets/facebook.svg";
 import {
   auth,
   getRedirectResult,
-  provider,
-  signInWithRedirect,
   createUserWithEmailAndPassword,
 } from "../config";
 import { useEffect, useState } from "react";
+import OtherLogin from "../components/OtherLogin";
 
 const useStyles = createUseStyles({
   register: {
@@ -111,99 +108,88 @@ const useStyles = createUseStyles({
   },
 });
 
-function Register() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function Register({user, setUser}: any) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
 
-  const googleLogin = () => {
-    console.log("Google Login");
-    signInWithRedirect(auth, provider);
-  };
-  const facebookLogin = () => {
-    console.log("Facebook Login");
-    signInWithRedirect(auth, provider);
-  };
+ 
   const emailLogin = (email: string, password: string) => {
-    console.log(email);
-    console.log(password);
-    
-    
-    console.log("Email Login");
-    createUserWithEmailAndPassword(auth, email, password)
+    if(password === cPassword){
+      createUserWithEmailAndPassword(auth, email, password);
+    }else{
+      console.log("Check Your Passwords");
+    }
       
   };
-
-  //Get Redirect Result
   useEffect(() => {
     getRedirectResult(auth)
       .then((result) => {
         if (result) {
           console.log(result.user);
-        } else {
-          //...
+          setUser(result.user)
         }
       })
       .catch((error) => {
         console.log(error);
       });
+      
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <motion.main
-      className={classes.register}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <ChatterLogo />
-      <div className={classes.registerContainer}>
-        <form>
-          <input
-            type="email"
-            placeholder="E-Mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={cPassword}
-            onChange={(e) => setCPassword(e.target.value)}
-          />
-          <button type="submit" onClick={() => emailLogin(email, password)}>
-            Register
-          </button>
-        </form>
-        <div className="divider">
-          <hr /> OR <hr />
-        </div>
-        <div className="otherRegister">
-          <div className="item" onClick={googleLogin}>
-            <img src={GLogo} alt="Google" />
-            <p>Google</p>
+    <>
+      {user ? (
+        <Navigate to="/u/dashboard" />
+      ) : (
+        <motion.main
+          className={classes.register}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <ChatterLogo />
+          <div className={classes.registerContainer}>
+            <form>
+              <input
+                type="email"
+                placeholder="E-Mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={cPassword}
+                onChange={(e) => setCPassword(e.target.value)}
+              />
+              <button type="submit" onClick={() => emailLogin(email, password)}>
+                Register
+              </button>
+            </form>
+            <div className="divider">
+              <hr /> OR <hr />
+            </div>
+            <OtherLogin />
+            <p className="registerLink">
+              Already have an account?{" "}
+              <Link to="/login">
+                <span>Login</span>
+              </Link>
+            </p>
           </div>
-          <div className="item" onClick={facebookLogin}>
-            <img src={FLogo} alt="Facebook" />
-            <p>Facebook</p>
-          </div>
-        </div>
-        <p className="registerLink">
-          Already have an account?{" "}
-          <Link to="/login">
-            <span>Login</span>
-          </Link>
-        </p>
-      </div>
-    </motion.main>
+        </motion.main>
+      )}
+    </>
   );
 }
 

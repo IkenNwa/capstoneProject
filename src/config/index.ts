@@ -33,7 +33,6 @@ const db = getFirestore(app);
 const auth = getAuth();
 
 
-
 export {
   app,
   provider,

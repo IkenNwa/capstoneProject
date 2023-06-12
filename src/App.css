@@ -20,7 +20,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100svh;
-
 }
 
 .App {
@@ -28,14 +27,15 @@ body {
 }
 
 .max-margin {
-  margin-top: 4rem;
+  margin-top: 7rem;
+  width: 100%;
 }
 
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   height: 100vh;
 }
@@ -43,7 +43,15 @@ body {
 .view {
   margin-top: 2rem;
 }
-
+.sect{
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  text-align: center;
+}
 .disp {
   display: flex;
   flex-direction: column;

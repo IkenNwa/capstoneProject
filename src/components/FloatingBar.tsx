@@ -9,8 +9,8 @@ import AddImage from "./AddImage";
 
 const styles = createUseStyles({
   floating: {
-    position: "fixed",
-    top: "50vh",
+    position: "absolute",
+    top: "64vh",
     right: "50vw",
     display: "flex",
     flexDirection: "row",
@@ -29,6 +29,12 @@ const styles = createUseStyles({
       backgroundColor: "transparent",
       borderRadius: "5px",
       cursor: "pointer",
+    },
+  },
+  "@media (max-width: 650px)": {
+    floating: {
+      right: "2vw",
+      top: "50vh",
     },
   },
 });

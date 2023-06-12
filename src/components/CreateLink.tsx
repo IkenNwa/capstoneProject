@@ -27,16 +27,16 @@ const usestyles = createUseStyles({
     "& button": {
       margin: "0 0.5rem",
       padding: "0.5rem",
-      border: "none",
+      border: "2px solid #C80028",
       outline: "none",
-      backgroundColor: "#C80028",
+      backgroundColor: "#FFEFEF",
       borderRadius: "5px",
       cursor: "pointer",
       fontSize: "10px",
-      color: "#FFEFEF",
+      color: "#C80028",
       "&:hover": {
-        color: "#C80028",
-        backgroundColor: "#FFEFEF",
+        color: "#FFEFEF",
+        backgroundColor: "#C80028",
       },
     },
   },
@@ -61,7 +61,7 @@ const CreateLink = ({active, mark, setMark, setActive}:any) => {
         <button
           onClick={() => {
             setActive(false);
-            setMark(mark + `\n[${alt}](${link})`);
+            setMark(mark + `[${alt}](${link})`);
           }}
         >
           Insert

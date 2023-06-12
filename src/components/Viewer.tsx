@@ -4,7 +4,7 @@ import CreditsBanner from "./CreditsBanner"
 import Interactions from "./Interactions"
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Viewer({markdown}:any) {
-  return (
+    return (
     <div>
       <div className="article max-margin">
         <UserBanner />

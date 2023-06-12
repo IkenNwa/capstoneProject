@@ -1,14 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import "./App.css";
-import Editor from "./views/Editor";
-// import ChatterRoutes from "./router";
+import ChatterRoutes from "./router";
+
 
 function App() {
+  //Create a context to store the user data from firebase
+  const [user, setUser] = useState<any>(null);
 
+  
 
   return (
     <div className="App">
-      {/* <ChatterRoutes /> */}
-      <Editor />
+      <ChatterRoutes 
+      user={user} 
+      setUser={setUser}
+        />
     </div>
   );
 }

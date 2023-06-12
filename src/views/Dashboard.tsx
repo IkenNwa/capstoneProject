@@ -1,4 +1,6 @@
+import { Outlet } from "react-router";
 import Header from "../components/Header"
+import MiniNav from "../components/MiniNav";
 
 
 function Dashboard() {
@@ -6,8 +8,9 @@ function Dashboard() {
   return (
     <div className="main">
       <Header />
-      <div>
-        <h1>Dashboard</h1>
+      <div className="max-margin">
+        <MiniNav />
+        <Outlet />
       </div>
     </div>
   );

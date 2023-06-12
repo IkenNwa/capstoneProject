@@ -1,4 +1,6 @@
 import { createUseStyles } from "react-jss"
+import Interactions from "./Interactions";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 
 
@@ -56,19 +58,23 @@ const useStyles = createUseStyles({
     },
 });
 
-function FeedItem() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function FeedItem({title, overview, image}: any) {
     const classes = useStyles();
   return (
     <div className={classes.all}>
         <div className={classes.feedImage}>
-            <img src="/guitar.jpg" alt="feedImage" />
+            <img src={image} alt="feedImage" />
             </div>
             <div className={classes.feedContent}>
-            <h1 className={classes.feedContentHeader}>Picking the Best Guitar</h1>
+            <h1 className={classes.feedContentHeader}>{title}</h1>
             <p className={classes.feedContentOverview}>
-                A lions guide to buying great sounding guitars
+                <ReactMarkdown>
+                {overview}
+                </ReactMarkdown>
             </p>
             </div>
+            <Interactions />
     </div>
   )
 }
