@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Date: 9/4/2021
 // Note: React Router v6
 
@@ -12,6 +13,9 @@ import {
 } from "../config";
 import { useEffect, useState } from "react";
 import OtherLogin from "../components/OtherLogin";
+import { useContext } from "react";
+import { UserContext } from "../context";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const useStyles = createUseStyles({
   register: {
@@ -108,17 +112,28 @@ const useStyles = createUseStyles({
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function Register({user, setUser}: any) {
+function Register() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
+  const { user, setUser } = useContext<any>(UserContext)
 
  
-  const emailLogin = (email: string, password: string) => {
+  const emailLogin = (e:any) => {
+    e.preventDefault();
     if(password === cPassword){
       createUserWithEmailAndPassword(auth, email, password);
+      setTimeout(() => {
+        signInWithEmailAndPassword(auth, email, password)
+          .then((result) => {
+            setUser(result.user);
+          })
+          .catch((error) => {
+            console.log(error.code, error.message);
+          });
+      }, 1000);
+
     }else{
       console.log("Check Your Passwords");
     }
@@ -172,7 +187,7 @@ function Register({user, setUser}: any) {
                 value={cPassword}
                 onChange={(e) => setCPassword(e.target.value)}
               />
-              <button type="submit" onClick={() => emailLogin(email, password)}>
+              <button type="submit" onClick={emailLogin}>
                 Register
               </button>
             </form>

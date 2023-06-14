@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { signOut } from "firebase/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { createUseStyles } from "react-jss"
 import { useNavigate } from "react-router";
 import { auth } from "../config";
+import { UserContext } from "../context";
 
 
 const useStyles = createUseStyles({
@@ -47,15 +49,19 @@ function Profile() {
     const classes = useStyles();
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
+    // User Context
+    const { user } = useContext<any>(UserContext);
 
     const handleLogout = () => {
         signOut(auth);
+        navigate("/login");
     }
 
   return (
-    <div className="profile">
+    <>{user ? (
+      <div className="profile">
       <div className={classes.profile} onClick={() => setShow(!show)}>
-        {show ? <RiCloseCircleLine /> : "AK"}
+        {show ? <RiCloseCircleLine /> : user?.displayName[0]}
       </div>
       {show ? (
         <>
@@ -69,6 +75,13 @@ function Profile() {
         ""
       )}
     </div>
+    ): (
+      <button 
+      className="btn"
+      onClick={() => navigate("/login")}
+      >Login</button>
+    )}
+    </>
   );
 }
 

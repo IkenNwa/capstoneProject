@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
 import Header from "../components/Header";
 import { MdDeleteForever, MdSave } from "react-icons/md";
-import { auth } from "../config";
+import { useContext, useState } from "react";
+import { UserContext } from "../context";
+import { updateEmail, updateProfile } from "firebase/auth";
 
 const styles = createUseStyles({
   profile: {
@@ -57,10 +60,21 @@ const styles = createUseStyles({
 });
 
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function AccountSettings(user: any) {
+function AccountSettings() {
   const classes = styles();
-const u = user.user;
+  const {user} = useContext<any>(UserContext)
+  //States for all inputs
+  const [fullName, setFullName] = useState(user?.displayName)
+  const [email, setEmail] = useState(user?.email)
+
+  function updateUser() {
+    updateProfile(user, {
+      displayName: fullName,
+    })
+    updateEmail(user, email)
+  }
+
+
   return (
     <>
     <Header />
@@ -68,22 +82,38 @@ const u = user.user;
         <div className={classes.profile}>
           <div className="pPhoto">
             {user?.photoURL ? (
-              <img src={u?.photoURL} alt="" />
+              <img src={user?.photoURL} alt="" />
             ) : (
-              u?.displayName?.charAt(0)
+              user?.displayName?.charAt(0)
             )}
           </div>
-          <h2>{u?.displayName}</h2>
+          <h2>{user?.displayName}</h2>
           <p>Actor/Musician</p>
         </div>
         <div className={classes.settings}>
           <form className="pForm">
-            <input type="text" name="FirstName" id="" value={u?.displayName}  placeholder="FirstName" />
-            <input type="text" name="LastName" id="" placeholder="LastName" />
-            <input type="number" name="Age" id="" placeholder="Age" />
+            <input
+            className="double" 
+            type="text" 
+            name="FullName" 
+            id="" 
+            value={fullName} 
+            placeholder="Full-Name"
+            onChange={(e) => setFullName(e.target.value)}
+            />
+            <input 
+            type="email"
+            name="email"
+            value={email}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+              />
             <input type="text" name="" id="" placeholder="Occupation" />
             <textarea name="Bio" id="" placeholder="Bio" className="double"></textarea>
-            <button className="btn save"><MdSave /> Save</button>
+            <button 
+            className="btn save"
+            onClick={updateUser}
+            ><MdSave /> Save</button>
           </form>
           <button className="btn delete"> <MdDeleteForever/>Delete Your Account</button>
         </div>

@@ -1,6 +1,5 @@
 import { createUseStyles } from "react-jss"
 import Interactions from "./Interactions";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 
 
@@ -25,7 +24,7 @@ const useStyles = createUseStyles({
         width: "100%",
         height: "250px",
         backgroundColor: "#c4c4c4",
-        borderRadius: "0.5rem",
+        borderRadius: "0.5rem 0.5rem 0 0",
         overflow: "hidden",
         "& img": {
             width: "100%",
@@ -64,15 +63,13 @@ function FeedItem({title, overview, image}: any) {
   return (
     <div className={classes.all}>
         <div className={classes.feedImage}>
-            <img src={image} alt="feedImage" />
+            <img src={image ? image : "/Chatter.png"} alt="feedImage" />
             </div>
             <div className={classes.feedContent}>
             <h1 className={classes.feedContentHeader}>{title}</h1>
-            <p className={classes.feedContentOverview}>
-                <ReactMarkdown>
+            <div className={classes.feedContentOverview}>
                 {overview}
-                </ReactMarkdown>
-            </p>
+            </div>
             </div>
             <Interactions />
     </div>

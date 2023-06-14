@@ -43,15 +43,6 @@ body {
 .view {
   margin-top: 2rem;
 }
-.sect{
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  text-align: center;
-}
 .disp {
   display: flex;
   flex-direction: column;

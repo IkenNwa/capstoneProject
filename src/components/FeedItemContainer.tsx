@@ -39,9 +39,9 @@ function FeedItemContainer() {
     const [posts, setPosts] = useState<any>([]);
     useEffect(() => {
         onSnapshot(collection(db, "posts"), (snapshot) => {
-            setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-            console.log(posts);
-            
+            // setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+            // set the posts state to the data from the database in order of newest to oldest
+            setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })).reverse());
         }
         );
     // eslint-disable-next-line react-hooks/exhaustive-deps

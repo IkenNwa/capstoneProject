@@ -16,7 +16,7 @@ const styles = createUseStyles({
             width: "150px",
             height: "40px",
             borderRadius: "5px",
-            border: "1px solid #C80028",
+            border: "transparent",
             outline: "none",
             padding: "0 2rem",
             margin: "0.5rem 0.5rem",

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Route, Routes, useLocation } from "react-router";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Login from "../views/Login";
 import Landing from "../views/Landing";
 import NotFound from "../views/NotFound";
@@ -15,18 +15,21 @@ import Post from "../views/Post";
 import AccountSettings from "../views/AccountSettings";
 import Published from "../views/Published";
 import SearchView from "../views/SearchView";
-function ChatterRoutes({ user, setUser}: any) {
+import VerifyUser from "../views/VerifyUser";
+import { UserContext } from "../context";
+function ChatterRoutes() {
   const location = useLocation();
   const [searchParam] = useState("");
+  const {user} = useContext<any>(UserContext)
   
   return (
     <AnimatePresence>
       <Routes key={location.pathname} location={location}>
         <Route path="/" element={<Landing />} />
-        <Route path="login" element={<Login setUser={setUser} user={user} />} />
+        <Route path="login" element={<Login />} />
         <Route
           path="register"
-          element={<Register setUser={setUser} user={user} />}
+          element={<Register />}
         />
         {user ? (
           <>
@@ -34,13 +37,14 @@ function ChatterRoutes({ user, setUser}: any) {
               <Route index element={<DashboardFeed  />} />
               <Route path="myarticles" element={<MyArticle  />} />
             </Route>
+            <Route path="u/createProfile" element={<VerifyUser />} />
             <Route path={"u/search/" + searchParam} element={<SearchView />} />
             <Route path="u/editor" element={<Editor />} />
             <Route path="u/completed" element={<Published />} />
 
             <Route
               path="u/settings"
-              element={<AccountSettings user={user} />}
+              element={<AccountSettings />}
             />
           </>
         ) : null}

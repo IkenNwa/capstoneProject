@@ -4,9 +4,10 @@ import ChatterLogo from "../components/ChatterLogo";
 import {motion} from 'framer-motion'
 import { Link, Navigate } from "react-router-dom";
 import OtherLogin from "../components/OtherLogin";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getRedirectResult, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config";
+import { UserContext } from "../context";
 
 const useStyles = createUseStyles({
   loginPage: {
@@ -112,12 +113,13 @@ const useStyles = createUseStyles({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function Login({user, setUser}: any) {
+function Login() {
+  const { user, setUser } = useContext<any>((UserContext));
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e: any) => {
+  const handleLogin = (e:any) => {
     e.preventDefault();
     signInWithEmailAndPassword( auth, email, password)
     .then((result) => {

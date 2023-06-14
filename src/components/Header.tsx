@@ -21,12 +21,11 @@ const useStyles = createUseStyles({
 
 function Header() {
   const classes = useStyles();
-  const user = true;
   return (
     <div className={classes.header}>
       <ChatterLogo />
       <Search />
-      {user ? <Profile /> : ""}
+      <Profile />
     </div>
   );
 }
