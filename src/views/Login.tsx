@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
 import ChatterLogo from "../components/ChatterLogo";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 import { Link, Navigate } from "react-router-dom";
 import OtherLogin from "../components/OtherLogin";
 import { useContext, useEffect, useState } from "react";
 import { getRedirectResult, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config";
 import { UserContext } from "../context";
+import SEO from "../components/SEO";
 
 const useStyles = createUseStyles({
   loginPage: {
@@ -55,6 +56,11 @@ const useStyles = createUseStyles({
         fontWeight: "light",
         cursor: "pointer",
       },
+      "& .ptag":{
+        color: "#C80028",
+        fontSize: "12px",
+        fontWeight: "bold",
+      }
     },
     "& .divider": {
       display: "flex",
@@ -114,36 +120,43 @@ const useStyles = createUseStyles({
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Login() {
-  const { user, setUser } = useContext<any>((UserContext));
+  const { user, setUser } = useContext<any>(UserContext);
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+  useEffect(() => {
+    setTimeout(() => {
+      setMsg("")
+    }, 5000);
+  }, [msg])
+  
 
-  const handleLogin = (e:any) => {
+  const handleLogin = (e: any) => {
     e.preventDefault();
-    signInWithEmailAndPassword( auth, email, password)
-    .then((result) => {
-      // Signed in
-      setUser(result.user);
-      // ...
-    })
-    .catch((error) => {
-      console.log(error.code, error.message);
-    });
-  }
-
-
+    setMsg("Logging you in");
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        // Signed in
+        setUser(result.user);
+        // ...
+      })
+      .catch(() => {
+        setMsg("Check Your Details...");
+      });
+  };
 
   useEffect(() => {
     getRedirectResult(auth)
       .then((result) => {
         if (result) {
-          console.log(result.user);
+          setMsg("Please Wait...");
+
           setUser(result.user);
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        setMsg("Do you have an account!");
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -151,7 +164,7 @@ function Login() {
   return (
     <>
       {user ? (
-       <Navigate to="/u/dashboard" />
+        <Navigate to="/u/dashboard" />
       ) : (
         <motion.main
           className={classes.loginPage}
@@ -160,19 +173,28 @@ function Login() {
           exit={{ opacity: 0, height: "0svh" }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
+          <SEO title="Login to Chatter" />
           <ChatterLogo />
           <div className={classes.loginContainer}>
             <form className="formContainer">
-              <input type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="E-Mail"  />
-              <input 
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password" />
-              <button type="submit" onClick={handleLogin}>Login</button>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="E-Mail"
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+              <button type="submit" onClick={handleLogin}>
+                Login
+              </button>
+              <p className="ptag">
+                <i>{msg}</i>
+              </p>
             </form>
             <div className="divider">
               <hr /> OR <hr />

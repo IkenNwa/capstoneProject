@@ -1,6 +1,7 @@
 import { createUseStyles } from "react-jss";
 import BackBtn from "../components/BackBtn";
 import ChatterLogo from "../components/ChatterLogo";
+import SEO from "../components/SEO";
 
 const styles = createUseStyles({
   page:{
@@ -17,6 +18,7 @@ function NotFound() {
   const classes = styles()
   return (
     <div className={classes.page}>
+      <SEO title="Not Found" />
       <ChatterLogo />
       <h1>The Page you are looking for cannot be Found.</h1>
       <BackBtn />

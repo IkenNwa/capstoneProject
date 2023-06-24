@@ -4,6 +4,7 @@ import Header from "../components/Header"
 import MiniNav from "../components/MiniNav";
 import { useContext } from "react";
 import { UserContext } from "../context";
+import SEO from "../components/SEO";
 
 
 function Dashboard() {
@@ -11,6 +12,11 @@ function Dashboard() {
 
   return (
     <div className="main">
+      <SEO 
+      title="Dashboard" 
+      description="Dashboard"
+      article={false}
+      />
       {user?.displayName ? (
         <>
         <Header />

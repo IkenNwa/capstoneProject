@@ -4,7 +4,9 @@ import Header from "../components/Header";
 import { MdDeleteForever, MdSave } from "react-icons/md";
 import { useContext, useState } from "react";
 import { UserContext } from "../context";
-import { updateEmail, updateProfile } from "firebase/auth";
+import { deleteUser, updateEmail, updateProfile } from "firebase/auth";
+import { Navigate, useNavigate } from "react-router";
+import SEO from "../components/SEO";
 
 const styles = createUseStyles({
   profile: {
@@ -22,6 +24,12 @@ const styles = createUseStyles({
       justifyContent: "center",
       fontSize: "10rem",
       color: "#FFEFEF",
+      marginBlock: "1.6rem",
+      "& img": {
+        width: "98%",
+        height: "98%",
+        borderRadius: "50%",
+      },
     },
     "& h2": {
       fontSize: "2.5rem",
@@ -66,19 +74,36 @@ function AccountSettings() {
   //States for all inputs
   const [fullName, setFullName] = useState(user?.displayName)
   const [email, setEmail] = useState(user?.email)
+  const navigate = useNavigate()
 
-  function updateUser() {
+  function updateUser(e: any) {
+    e.preventDefault()
     updateProfile(user, {
       displayName: fullName,
     })
     updateEmail(user, email)
+    alert("Profile Updated")
+    navigate("/u/dashboard")
+
+  }
+  function deleteUsers() {
+    deleteUser(user).then(() => {
+      alert("User Deleted")
+    }
+    ).catch((error) => {
+      console.log(error)
+    }
+    )
+    //Refresh the page
+    window.location.reload()
+
   }
 
 
   return (
-    <>
-    <Header />
+    <>{user ? (<><Header />
       <div className="max-margin">
+        <SEO title="Account Settings" />
         <div className={classes.profile}>
           <div className="pPhoto">
             {user?.photoURL ? (
@@ -115,9 +140,11 @@ function AccountSettings() {
             onClick={updateUser}
             ><MdSave /> Save</button>
           </form>
-          <button className="btn delete"> <MdDeleteForever/>Delete Your Account</button>
+          <button 
+          onClick={deleteUsers}
+          className="btn delete"> <MdDeleteForever/>Delete Your Account</button>
         </div>
-      </div>
+      </div></>): <Navigate to={"/login"} />}
     </>
   );
 }

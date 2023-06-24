@@ -1,5 +1,8 @@
+import { useContext, useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import { createUseStyles } from "react-jss";
+import { SearchContext } from "../context";
+import { useNavigate } from "react-router";
 
 const useStyles = createUseStyles({
   search: {
@@ -35,10 +38,27 @@ const useStyles = createUseStyles({
 
 function Search() {
   const classes = useStyles();
+  const { search, setSearch } = useContext<any>(SearchContext);
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate(`/search/${search}`);
+  };
   return (
     <div className={classes.search}>
-      <input type="text" placeholder="Search by Article, Author, or Tags" />
-      <RiSearchLine />
+      <input
+        type="text"
+        placeholder="Search by Article, Author, or Tags"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSearch();
+          }
+        }}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+      />
+      <RiSearchLine onClick={handleSearch} />
     </div>
   );
 }

@@ -16,6 +16,7 @@ import OtherLogin from "../components/OtherLogin";
 import { useContext } from "react";
 import { UserContext } from "../context";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import SEO from "../components/SEO";
 
 const useStyles = createUseStyles({
   register: {
@@ -166,6 +167,7 @@ function Register() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
+          <SEO title="Register" />
           <ChatterLogo />
           <div className={classes.registerContainer}>
             <form>

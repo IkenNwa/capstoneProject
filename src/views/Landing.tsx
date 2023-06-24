@@ -4,6 +4,8 @@ import FeedItemContainer from "../components/FeedItemContainer";
 import { createUseStyles } from "react-jss";
 import CLogo from "/Chatter.png"
 import Profile from "../components/Profile";
+import Features from "../components/Features";
+import SEO from "../components/SEO";
 
 
 const styles = createUseStyles({
@@ -72,6 +74,7 @@ function Landing() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
+      <SEO title="Welcome to Chatter" />
       <section className={classes.sect}>
         <div className={classes.navi}>
           <ChatterLogo />
@@ -96,20 +99,11 @@ function Landing() {
         </article>
       </section>
       <section className={classes.sect}>
-        <h3>Testimonies</h3>
-        <div>
-          <div>
-            <ChatterLogo />
-            <div>
-              <h5>Ada Lovelace</h5>
-              <p>Pioneer Programmer</p>
-            </div>
-          </div>
-          <p>Such a wonder in an app</p>
-        </div>
+        <h1>Features</h1>
+        <Features />
       </section>
       <section className={classes.sect}>
-        <h2>Trending</h2>
+        <h2>Latest</h2>
         <FeedItemContainer />
       </section>
     </motion.main>

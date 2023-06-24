@@ -1,6 +1,7 @@
-import { RiShareForward2Fill } from "react-icons/ri"
 import Header from "../components/Header";
 import { createUseStyles } from "react-jss";
+import SEO from "../components/SEO";
+import { useNavigate } from "react-router";
 
 const styles = createUseStyles({
   publishedPage:{
@@ -21,18 +22,19 @@ const styles = createUseStyles({
 
 function Published() {
   const classes = styles()
+  const navigate = useNavigate();
+  setTimeout(() => {
+    navigate("/u/dashboard")
+  }, 3000);
+
   return (
     <>
+    <SEO title="Published" />
     <Header />
       <div className={classes.publishedPage + " max-margin"}>
         <img src="/Chatter2Logo2.svg" alt="Published" />
         <h1>🎉Yay!😍</h1>
         <p><b>Article</b> has been published</p>
-        <div>
-          <p>
-            Share to Friends using this link <span><RiShareForward2Fill /></span>
-          </p>
-        </div>
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { RiCloseLine, RiDeleteBin2Line } from "react-icons/ri";
 import { createUseStyles } from "react-jss";
@@ -8,6 +9,11 @@ import { MdPublish } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../config";
+import SEO from "../components/SEO";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 
 const usestyles = createUseStyles({
   editor: {
@@ -21,9 +27,9 @@ const usestyles = createUseStyles({
   },
   inp: {
     border: "none",
-    fontSize: "1.4rem",
+    fontSize: "1.2rem",
     outline: "none",
-    paddingBlock: "2rem",
+    paddingBlock: "1.5rem",
   },
   textarea: {
     height: "100%",
@@ -118,10 +124,6 @@ function Editor() {
   const [title, setTitle] = useState("");
   const [imgLink, setImgLink] = useState("");
   const postRef = collection(db, "posts");
-  
-  useEffect(() => {
-    document.title = "Editor | Markdown Editor";
-  }, []);
   const navigate = useNavigate();
 
   const handlePublish = async (e: { preventDefault: () => void; }) => {
@@ -135,23 +137,45 @@ function Editor() {
       uid: auth.currentUser?.uid,
       author: auth.currentUser?.displayName,
       image: imgLink,
-      likes: 0,
+      likes: [],
       comments: [],
     });
       setMarkdown("");
       setTitle("");
+      localStorage.removeItem("markdown");
+      localStorage.removeItem("title");
       navigate("/u/completed");
     
   };
-
-  //Get currently sigbed in user
-  // const user = auth.currentUser;
-  
-
-  // Make floating bar follow the cursor in text area
+  const handleSave = (e:any) => {
+    e.preventDefault();
+    if (markdown === "") return alert("Please Write Something to Save");
+    localStorage.setItem("markdown", markdown);
+    localStorage.setItem("imgLink", imgLink);
+    localStorage.setItem("title", title);
+    navigate("/u/dashboard");
+  }
+  const handleDelete = (e:any) => {
+    e.preventDefault();
+    localStorage.removeItem("markdown");
+    localStorage.removeItem("title");
+    localStorage.removeItem("imgLink");
+    setMarkdown("");
+    setTitle("");
+    setImgLink("");
+  }
+  useEffect(() => {
+    const savedMarkdown = localStorage.getItem("markdown");
+    const savedImgLink = localStorage.getItem("imgLink");
+    const savedTitle = localStorage.getItem("title");
+    if (savedMarkdown) setMarkdown(savedMarkdown);
+    if (savedTitle) setTitle(savedTitle);
+    if (savedImgLink) setImgLink(savedImgLink);
+  }, []);
 
   return (
     <div className={classes.editor}>
+      <SEO title="Editor" />
       <Header />
 
       <form className={classes.textarea}>
@@ -164,13 +188,15 @@ function Editor() {
           autoFocus
           required
         />
-        <input 
-        type="text" 
-        placeholder="Enter Cover Image Link"
-        value={imgLink}
-        onChange={(e) => setImgLink(e.target.value)}
-        name="cover" 
-        id=""  />
+        <input
+          type="text"
+          placeholder="Enter Cover Image Link"
+          className={classes.inp}
+          value={imgLink}
+          onChange={(e) => setImgLink(e.target.value)}
+          name="cover"
+          id=""
+        />
         <textarea
           onChange={(e) => setMarkdown(e.target.value)}
           value={markdown}
@@ -181,10 +207,10 @@ function Editor() {
           <button title="Publish" onClick={handlePublish}>
             <MdPublish />
           </button>
-          <button disabled title="Save and close">
+          <button onClick={handleSave} title="Save and close">
             <RiCloseLine />
           </button>
-          <button disabled title="Delete Entirely">
+          <button onClick={handleDelete} title="Delete Entirely">
             <RiDeleteBin2Line />
           </button>
         </div>
@@ -192,7 +218,10 @@ function Editor() {
       </form>
 
       <div className={classes.preview}>
-        <ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm, remarkMath]}
+          rehypePlugins={[rehypeKatex, rehypeRaw]}
+        >
           {markdown ? markdown : "### Preview Here..."}
         </ReactMarkdown>
       </div>

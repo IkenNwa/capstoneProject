@@ -1,4 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { doc, setDoc } from "firebase/firestore";
+import { useContext, useState } from "react";
 import { createUseStyles } from "react-jss";
+import { db } from "../config";
+import { PostContext } from "../context";
 
 const useStyles = createUseStyles({
   review: {
@@ -46,24 +51,35 @@ const useStyles = createUseStyles({
 });
 
 function CreditsBanner() {
-    const classes = useStyles()
+  const classes = useStyles();
+  const {post} = useContext<any>(PostContext);
+  const [comments, setComments] = useState("");
+  const thisPost = doc(db, "posts", post.id);
+  const handleComment = async (e:any) => {
+    e.preventDefault();
+    await setDoc(thisPost, {
+      comments: [...post.comments, comments],
+    });
+  };
+
   return (
     <div>
       <div className={classes.review}>
-        
         <form className={classes.comment}>
           <div className={classes.profile}>AK</div>
           <div className={classes.textarea}>
-            <textarea placeholder="Your Comment here!.."></textarea>
-            <button className="btn" type="submit">Comment</button>
+            <textarea
+              onChange={(e) => setComments(e.target.value)}
+              placeholder="Your Comment here!.."
+            ></textarea>
+            <button onClick={handleComment} className="btn" type="submit">
+              Comment
+            </button>
           </div>
         </form>
-      </div>
-      <div>
-
       </div>
     </div>
   );
 }
 
-export default CreditsBanner
+export default CreditsBanner;

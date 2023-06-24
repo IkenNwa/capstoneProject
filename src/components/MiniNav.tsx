@@ -1,6 +1,4 @@
 import { createUseStyles } from "react-jss";
-import { motion } from "framer-motion";
-import { useState } from "react";
 import { useNavigate } from "react-router";
 
 const styles = createUseStyles({
@@ -40,18 +38,9 @@ const styles = createUseStyles({
 
 function MiniNav() {
   const classes = styles();
-  const [active, setActive] = useState(true);
   const navigate = useNavigate();
   
-  
 
-  let activeBar = { left: "50%" };
-
-  if (active) {
-    activeBar = {
-      left: "0",
-    };
-  }
   return (
     <div className={classes.all}>
       <div className={classes.space}></div>
@@ -59,7 +48,6 @@ function MiniNav() {
         <div
           onClick={() => {
             navigate("/u/dashboard");
-            setActive(true);
           }}
         >
           Home
@@ -68,18 +56,11 @@ function MiniNav() {
         <div
           onClick={() => {
             navigate("myarticles");
-            setActive(false);
           }}
         >
           My Articles
         </div>
       </div>
-      <motion.div
-        className={classes.floatingLine}
-        initial={{ left: 0 }}
-        animate={activeBar}
-        transition={{ duration: 0.5 }}
-      ></motion.div>
     </div>
   );
 }

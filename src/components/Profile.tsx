@@ -51,6 +51,8 @@ function Profile() {
     const navigate = useNavigate();
     // User Context
     const { user } = useContext<any>(UserContext);
+      
+
 
     const handleLogout = () => {
         signOut(auth);

@@ -5,6 +5,7 @@ import { useContext, useState } from "react"
 import { updateProfile } from "firebase/auth";
 import ChatterLogo from "../components/ChatterLogo";
 import { createUseStyles } from "react-jss";
+import SEO from "../components/SEO";
 
 
 const styles = createUseStyles({
@@ -54,6 +55,7 @@ export default function VerifyUser() {
 
   return (
     <div className={classes.all}>
+        <SEO title="Create Profile" />
         <ChatterLogo />
         {user ? (
             <div className={classes.create}>
