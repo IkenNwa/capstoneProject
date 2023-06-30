@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
 import FeedItem from "./FeedItem";
-import { useContext, useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../config";
+import { useContext } from "react";
 import { FeedContext } from "../context";
 
 const useStyles = createUseStyles({

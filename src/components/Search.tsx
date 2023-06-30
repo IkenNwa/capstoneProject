@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useContext, } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import { createUseStyles } from "react-jss";
 import { SearchContext } from "../context";

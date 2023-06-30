@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Route, Routes, useLocation } from "react-router";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Login from "../views/Login";
 import Landing from "../views/Landing";
 import NotFound from "../views/NotFound";

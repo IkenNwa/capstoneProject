@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { RxHeart, RxHeartFilled, RxShare2 } from "react-icons/rx";
 import { createUseStyles } from "react-jss";
 import { PostContext, UserContext } from "../context";
@@ -34,11 +34,13 @@ function Interactions() {
       await updateDoc(postRef, {
         likes: [...post.likes, user?.uid],
       });
+      setCount(count + 1);
     }
     if (!heart) {
       await updateDoc(postRef, {
         likes: post.likes.filter((like: any) => like !== user?.uid),
       });
+      setCount(count - 1);
     }
   };
 
