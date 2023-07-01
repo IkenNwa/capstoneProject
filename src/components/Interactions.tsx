@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RxHeart, RxHeartFilled, RxShare2 } from "react-icons/rx";
 import { createUseStyles } from "react-jss";
 import { PostContext, UserContext } from "../context";
@@ -22,49 +22,54 @@ function Interactions() {
   const classes = useStyles();
   const { user } = useContext<any>(UserContext);
   const { post } = useContext<any>(PostContext);
-
   const [heart, setHeart] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(post.likes?.length || 0);
 
-  //Check if user has liked post
-  //Update Post.likes in firebase
+  // Update Post.likes in firebase
   const updateLikes = async () => {
     const postRef = doc(db, "posts", post.id);
-    if (heart) {
-      await updateDoc(postRef, {
-        likes: [...post.likes, user?.uid],
-      });
-      setCount(count + 1);
-    }
+    const updatedLikes = Array.isArray(post.likes) ? [...post.likes] : [];
     if (!heart) {
-      await updateDoc(postRef, {
-        likes: post.likes.filter((like: any) => like !== user?.uid),
-      });
-      setCount(count - 1);
+      updatedLikes.push(user?.uid);
+      await updateDoc(postRef, { likes: updatedLikes });
+      setCount(count + 1);
+    } else {
+      const index = updatedLikes.indexOf(user?.uid);
+      if (index !== -1) {
+        updatedLikes.splice(index, 1);
+        await updateDoc(postRef, { likes: updatedLikes });
+        setCount(count - 1);
+      }
     }
   };
 
+  // Check if user has liked post
+  useEffect(() => {
+    if (user && post.likes && post.likes.includes(user.uid)) {
+      setHeart(true);
+      setCount(post.likes.length);
+    }
+  }, [post, user]);
+
   return (
-    <>{user ? (
-      <ul className={classes.interactions}>
-      <li
-        onClick={() => {
-          setHeart(!heart);
-          updateLikes();
-        }}  
-      >
-        {heart ? (
-          <RxHeartFilled />
-        ) : (
-          <RxHeart />
-        )}
-        {count}
-      </li>
-      <li>
-        <RxShare2 />
-      </li>
-    </ul>) : (
-      <></>
+    <>
+      {user ? (
+        <ul className={classes.interactions}>
+          <li
+            onClick={() => {
+              setHeart(!heart);
+              updateLikes();
+            }}
+          >
+            {heart ? <RxHeartFilled /> : <RxHeart />}
+            {count}
+          </li>
+          <li>
+            <RxShare2 />
+          </li>
+        </ul>
+      ) : (
+        <></>
       )}
     </>
   );

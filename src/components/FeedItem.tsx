@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
-import Interactions from "./Interactions";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { PostContext } from "../context";
+import SMInteractions from "./SmallInteractions";
 
 const useStyles = createUseStyles({
   all: {
@@ -90,7 +90,7 @@ function FeedItem({
         <h1 className={classes.feedContentHeader}>{title}</h1>
         <div className={classes.feedContentOverview}>{overview}</div>
       </div>
-      <Interactions />
+      <SMInteractions likes={likes} comments={comments} />
     </div>
   );
 }

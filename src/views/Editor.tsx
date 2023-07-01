@@ -132,7 +132,7 @@ function Editor() {
     await addDoc(postRef, {
       title,
       content: markdown,
-      overview: markdown.slice(0, 100),
+      overview: `${markdown.slice(0, 100)} + "..."}`,
       createdAt: serverTimestamp(),
       uid: auth.currentUser?.uid,
       author: auth.currentUser?.displayName,

@@ -49,9 +49,9 @@ function Viewer() {
         >
           {post.content}
         </ReactMarkdown>
-        <Comments />
       </div>
       <Interactions />
+      <Comments />
       <CreditsBanner />
     </div>
   );
