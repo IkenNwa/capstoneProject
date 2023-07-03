@@ -12,6 +12,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import SEO from "./SEO";
+import BackBtn from "./BackBtn";
 
 const useStyles = createUseStyles({
   article: {
@@ -25,10 +26,59 @@ const useStyles = createUseStyles({
     padding: "0rem",
     margin: "1rem 0",
     "& img": {
-      width: "100%",
-      height: "250px",
+      width: "80svw",
+      height: "auto",
+      borderRadius: "0.5rem",
+      margin: "1rem 0",
       objectFit: "cover",
     },
+    "& h1": {
+      fontSize: "3rem",
+      fontWeight: "bold",
+      margin: "1rem 0",
+    },
+    "& h2": {
+      fontSize: "2rem",
+      fontWeight: "bold",
+      margin: "1rem 0",
+    },
+    "& h3": {
+      fontSize: "1.5rem",
+      fontWeight: "bold",
+      margin: "1rem 0",
+    },
+    "& h4": {
+      fontSize: "1.25rem",
+      fontWeight: "bold",
+      margin: "1rem 0",
+    },
+    "& h5": {
+      fontSize: "1rem",
+      fontWeight: "bold",
+      margin: "1rem 0",
+    },
+    "& h6": {
+      fontSize: "0.75rem",
+      fontWeight: "bold",
+      margin: "1rem 0",
+    },
+    "& p": {
+      fontSize: "1rem",
+      margin: "1rem 0",
+    },
+    "& ul": {
+      fontSize: "1rem",
+      margin: "1rem 0",
+    },
+    "& ol": {
+      fontSize: "1rem",
+      margin: "1rem 0",
+    },
+    "& li": {
+      fontSize: "1rem",
+      margin: "1rem 0",
+    },
+
   },
   maxMargin: {
     margin: "9rem 0",
@@ -42,6 +92,7 @@ function Viewer() {
     <div className={classes.maxMargin + " article"}>
       <SEO title={post.title + " ::Chatter"} description={post.content} />
       <div className={classes.article}>
+        <BackBtn />
         <UserBanner />
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath]}

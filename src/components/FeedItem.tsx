@@ -68,6 +68,7 @@ function FeedItem({
   comments,
   likes,
   id,
+  uid,
 }: any) {
   const classes = useStyles();
   const navigate = useNavigate();
@@ -77,10 +78,11 @@ function FeedItem({
       key={id}
       className={classes.all}
       onClick={() => {
-        setPost({ title, content, author, comments, likes, id });
+        setPost({ title, content, author, comments, likes, id, uid });
         //scroll to top
         window.scrollTo(0, 0);
-        navigate(`/post/${title}`);
+        //navigate to post without adding math symbol to url
+        navigate(`/post/${id}`, { replace: true });
       }}
     >
       <div className={classes.feedImage}>

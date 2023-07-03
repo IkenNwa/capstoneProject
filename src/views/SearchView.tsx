@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from "react";
-import FeedItemContainer from "../components/FeedItemContainer";
-import Header from "../components/Header";
+import { FeedItemContainer, Header } from "../components";
 import { FeedContext, PostContext, SearchContext } from "../context";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -3,10 +3,8 @@ import { Navigate, useNavigate } from "react-router";
 import { UserContext } from "../context"
 import { useContext, useState } from "react"
 import { updateProfile } from "firebase/auth";
-import ChatterLogo from "../components/ChatterLogo";
 import { createUseStyles } from "react-jss";
-import SEO from "../components/SEO";
-
+import { SEO, ChatterLogo } from "../components";
 
 const styles = createUseStyles({
     all:{

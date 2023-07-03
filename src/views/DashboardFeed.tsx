@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect } from "react";
-import FeedItemContainer from "../components/FeedItemContainer"
+import { FeedItemContainer } from "../components";
 import { FeedContext } from "../context";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../config";

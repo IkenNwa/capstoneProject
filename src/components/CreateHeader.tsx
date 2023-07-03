@@ -40,7 +40,9 @@ const CreateHeader = ({active, mark, setActive, setMark}:any) => {
         <li
           onClick={() => {
             setActive(false);
+            //Add to wherever the cursor is
             setMark(mark + `\n# `);
+            // setMark(mark + `\n# `);
           }}
         >
           Header 1

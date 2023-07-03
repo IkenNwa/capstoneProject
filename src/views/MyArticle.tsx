@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ArticlesFeed from "../components/ArticlesFeed"
-import SEO from "../components/SEO";
+import { SEO, ArticlesFeed } from "../components";
+
 function MyArticle() {
   return (
     <div>

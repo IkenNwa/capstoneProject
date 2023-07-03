@@ -1,15 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
-import ChatterLogo from "../components/ChatterLogo";
 import { motion } from "framer-motion";
 import { Link, Navigate } from "react-router-dom";
-import OtherLogin from "../components/OtherLogin";
 import { useContext, useEffect, useState } from "react";
 import { getRedirectResult, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config";
 import { UserContext } from "../context";
-import SEO from "../components/SEO";
-
+import { ChatterLogo, OtherLogin, SEO } from "../components";
 const useStyles = createUseStyles({
   loginPage: {
     display: "flex",
@@ -145,6 +143,8 @@ function Login() {
         setMsg("Check Your Details...");
       });
   };
+  
+
 
   useEffect(() => {
     getRedirectResult(auth)

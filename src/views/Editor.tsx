@@ -3,17 +3,15 @@ import { useEffect, useState } from "react";
 import { RiCloseLine, RiDeleteBin2Line } from "react-icons/ri";
 import { createUseStyles } from "react-jss";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import Header from "../components/Header";
-import FloatingBar from "../components/FloatingBar";
 import { MdPublish } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../config";
-import SEO from "../components/SEO";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
+import { SEO, Header, FloatingBar } from "../components";
 
 const usestyles = createUseStyles({
   editor: {

@@ -42,6 +42,20 @@ function Interactions() {
       }
     }
   };
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Check out this post on RxReview",
+          text: post.title,
+          url: window.location.href,
+        })
+        .then(() => console.log("Successful share"))
+        .catch((error) => console.log("Error sharing", error));
+    } else {
+      console.log("Web Share API not supported in your browser");
+    }
+  };
 
   // Check if user has liked post
   useEffect(() => {
@@ -64,7 +78,9 @@ function Interactions() {
             {heart ? <RxHeartFilled /> : <RxHeart />}
             {count}
           </li>
-          <li>
+          <li
+          onClick={handleShare}
+          >
             <RxShare2 />
           </li>
         </ul>

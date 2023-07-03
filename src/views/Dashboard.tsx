@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Navigate, Outlet } from "react-router";
-import Header from "../components/Header"
-import MiniNav from "../components/MiniNav";
+import { Header, MiniNav, SEO } from "../components";
 import { useContext } from "react";
 import { UserContext } from "../context";
-import SEO from "../components/SEO";
 
 
 function Dashboard() {

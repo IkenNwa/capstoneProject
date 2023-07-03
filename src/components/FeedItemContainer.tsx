@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
-import FeedItem from "./FeedItem";
 import { useContext } from "react";
 import { FeedContext } from "../context";
+import { FeedItem } from ".";
 
 const useStyles = createUseStyles({
   all: {
@@ -48,6 +48,7 @@ function FeedItemContainer() {
           author: string;
           likes: Array<string>;
           comments: any;
+          uid: string;
         }) => (
           <FeedItem
             id={post.id}
@@ -59,6 +60,7 @@ function FeedItemContainer() {
             likes={post.likes}
             key={post.id}
             comments={post.comments}
+            uid={post.uid}
           />
         )
       )}

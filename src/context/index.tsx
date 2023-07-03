@@ -1,26 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Create user Context
+//User Context
 
 import  { createContext, useState } from 'react';
 
 export const UserContext = createContext({});
 export const UserProvider = ({ children }:any ) => {
     const [user, setUser] = useState(null);
-
-    // useEffect(() => {
-    //     app.auth().onAuthStateChanged((user) =>{
-    //         setUser(user)
-    //     });
-    // }, [])
-    
-
     return (
         <UserContext.Provider value={{ user, setUser }}>
             {children}
         </UserContext.Provider>
     )
 }
-// Create Feed Context
+//Feed Context
 
 export const FeedContext = createContext({});
 export const FeedProvider = ({ children }:any ) => {
@@ -34,7 +26,7 @@ export const FeedProvider = ({ children }:any ) => {
 }
 
 
-// Create post Context
+//Post Context
 
 export const PostContext = createContext({});
 export const PostProvider = ({ children }:any ) => {
@@ -47,7 +39,7 @@ export const PostProvider = ({ children }:any ) => {
     )
 }
 
-//Create search Context
+//Search Context
 
 export const SearchContext = createContext({});
 export const SearchProvider = ({ children }:any ) => {

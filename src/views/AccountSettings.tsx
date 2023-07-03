@@ -6,8 +6,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../context";
 import { deleteUser, updateEmail, updateProfile } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router";
-import SEO from "../components/SEO";
-
+import { SEO } from "../components";
 const styles = createUseStyles({
   profile: {
     display: "flex",

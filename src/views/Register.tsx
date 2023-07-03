@@ -3,7 +3,6 @@
 // Note: React Router v6
 
 import { Link, Navigate } from "react-router-dom";
-import ChatterLogo from "../components/ChatterLogo";
 import { createUseStyles } from "react-jss";
 import { motion } from "framer-motion";
 import {
@@ -11,12 +10,11 @@ import {
   getRedirectResult,
   createUserWithEmailAndPassword,
 } from "../config";
+import {SEO, OtherLogin, ChatterLogo} from "../components";
 import { useEffect, useState } from "react";
-import OtherLogin from "../components/OtherLogin";
 import { useContext } from "react";
 import { UserContext } from "../context";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import SEO from "../components/SEO";
 
 const useStyles = createUseStyles({
   register: {

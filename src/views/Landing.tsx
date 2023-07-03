@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import ChatterLogo from "../components/ChatterLogo";
-import FeedItemContainer from "../components/FeedItemContainer";
 import { createUseStyles } from "react-jss";
-import CLogo from "/Chatter.png"
-import Profile from "../components/Profile";
-import Features from "../components/Features";
-import SEO from "../components/SEO";
-
+import CLogo from "/Chatter.png";
+import {
+  SEO,
+  ChatterLogo,
+  Profile,
+  Features,
+  FeedItemContainer,
+} from "../components";
 
 const styles = createUseStyles({
   sect: {
@@ -65,7 +66,7 @@ const styles = createUseStyles({
 });
 
 function Landing() {
-  const classes = styles()
+  const classes = styles();
   return (
     <motion.main
       className="disp"

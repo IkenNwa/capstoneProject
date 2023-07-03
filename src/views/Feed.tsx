@@ -1,5 +1,4 @@
-import FeedItemContainer from "../components/FeedItemContainer";
-import Header from "../components/Header";
+import { Header, FeedItemContainer } from "../components";
 
 
 function Feed() {
