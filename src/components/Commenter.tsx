@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { doc, setDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { useContext, useState } from "react";
 import { createUseStyles } from "react-jss";
 import { db } from "../config";
@@ -11,7 +11,6 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
   },
-
   profile: {
     backgroundColor: "#C80028",
     color: "white",
@@ -49,34 +48,42 @@ const useStyles = createUseStyles({
     },
   },
 });
-function Commenter() {
-    const classes = useStyles();
-    const { post } = useContext<any>(PostContext);
-    const { user } = useContext<any>(UserContext);
-    const [comment, setComment] = useState("");
-    const thisPost = doc(db, "posts", post.id);
-    const handleComment = async (e: any) => {
-      e.preventDefault();
 
-      if (user && user.id && comment) {
-        await setDoc(thisPost, {
-          comments: [
-            ...post.comments,
-            {
-              id: post.comments.length + 1,
-              user: user.id,
-              comment: comment,
-            },
-          ],
-        });
-      }
-    };
+function Commenter() {
+  const classes = useStyles();
+  const { post, setPost } = useContext<any>(PostContext);
+  const { user } = useContext<any>(UserContext);
+  const [comment, setComment] = useState("");
+
+  const handleComment = async (e: any) => {
+    e.preventDefault();
+    console.log(comment, user?.uid, post.comments.length);
+    
+    if (user && user?.uid && comment) {
+      const newComment = {
+        id: post.comments.length + 1,
+        user: user?.displayName,
+        comment: comment,
+        pImg: user?.photoURL,
+      };
+
+      const updatedComments = [...post.comments, newComment];
+
+      await updateDoc(doc(db, "posts", post.id), {
+        comments: updatedComments,
+      });
+      setPost({ ...post, comments: updatedComments });
+      setComment("");
+    }
+  };
+
   return (
     <div className={classes.review}>
       <form className={classes.comment}>
         <div className={classes.profile}>{user?.displayName.charAt(0)}</div>
         <div className={classes.textarea}>
           <textarea
+            value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Your Comment here!.."
           ></textarea>
