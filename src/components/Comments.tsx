@@ -33,6 +33,10 @@ const useStyles = createUseStyles({
       alignItems: "center",
       justifyContent: "center",
     },
+    "& .userName": {
+      fontWeight: "bold",
+      marginBlockEnd: "5px",
+    },
   },
 });
 
@@ -55,14 +59,14 @@ function Comments() {
                 )}
               </div>
               <div>
-                <div>{comment.user}</div>
+                <div className="userName">{comment.user}</div>
                 <div>{comment.comment}</div>
                 </div>
             </div>
           ))}
         </div>
       ) : (
-        <div>No comments yet</div>
+        <div><b>No comments yet</b></div>
       )}
     </div>
   );
