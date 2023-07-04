@@ -42,10 +42,12 @@ function ChatterRoutes() {
   useEffect(() => {
     //Prevent loading not found page
     if (location.pathname.includes("post")) {
+      setIsLoading(true);
       const id = location.pathname.split("/")[2];
       onSnapshot(doc(db, "posts", id), (snapshot) => {
         if (snapshot.exists()) {
           setPost({ ...snapshot.data(), id: snapshot.id });
+          setIsLoading(false);
         } else {
           return;
         }
@@ -56,6 +58,7 @@ function ChatterRoutes() {
   //Find posts that match the search query in the url
   useEffect(() => {
     if (location.pathname.includes("search")) {
+      setIsLoading(true);
       const path = location.pathname.split("/")[2];
       setSearch(path);
       const q = collection(db, "posts");
@@ -69,6 +72,7 @@ function ChatterRoutes() {
             posts.push({ ...doc.data(), id: doc.id });
           }
           setFeed(posts.reverse());
+          setIsLoading(false);
         });
       });
       return () => {
