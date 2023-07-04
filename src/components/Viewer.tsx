@@ -90,7 +90,7 @@ function Viewer() {
   const classes = useStyles();
   return (
     <div className={classes.maxMargin + " article"}>
-      <SEO title={post.title + " ::Chatter"} description={post.content} />
+      <SEO title={post.title} description={post.content} />
       <div className={classes.article}>
         <BackBtn />
         <UserBanner />
