@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { createUseStyles } from "react-jss";
-import CLogo from "/Chatter.png";
 import {
   SEO,
   ChatterLogo,
@@ -8,6 +7,7 @@ import {
   Features,
   FeedItemContainer,
 } from "../components";
+import TypeWriter from "../components/TypeWriter";
 
 const styles = createUseStyles({
   sect: {
@@ -26,8 +26,26 @@ const styles = createUseStyles({
     marginInline: "40px",
     borderRadius: "50px",
     padding: "2rem",
-    height: "90svh",
+    height: "fit-content",
     alignItems: "center",
+    width: "fit-content",
+    "@media (min-width: 768px)": {
+      margin: "3rem",
+      width: "50%",
+      height: "fit-content",
+      padding: "3rem",
+
+    },
+    "& h3": {
+      fontSize: "2rem",
+      fontWeight: "bold",
+      marginBlockEnd: "1rem",
+    },
+    "& article": {
+      fontSize: "1.2rem",
+      textAlign: "center",
+      lineHeight: "2rem",
+    },
   },
   navi: {
     display: "flex",
@@ -38,10 +56,6 @@ const styles = createUseStyles({
   },
   hero: {
     height: "90%",
-    background: `url(${CLogo})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
     width: "100%",
     display: "flex",
     justifyContent: "center",
@@ -57,7 +71,7 @@ const styles = createUseStyles({
       width: "inherit",
       backdropFilter: "blur(15px)",
       "& h1": {
-        fontSize: "40px",
+        fontSize: "4rem",
         padding: "10px",
         textAlign: "center",
       },
@@ -84,7 +98,7 @@ function Landing() {
         <div className={classes.hero}>
           <div className="all">
             <h1># Welcome to Chatter</h1>
-            <p>Where Writing just got Complex</p>
+            <TypeWriter />
           </div>
         </div>
       </section>
