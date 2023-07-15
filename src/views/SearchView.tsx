@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from "react";
-import { FeedItemContainer, Header } from "../components";
+import { FeedItemContainer, Header, SEO } from "../components";
 import { SearchContext } from "../context";
 import { createUseStyles } from "react-jss";
 
@@ -46,18 +46,24 @@ const useStyles = createUseStyles({
 
 
 function SearchView() {
-  const { search } = useContext<any>(SearchContext);
+  const { search, searchError } = useContext<any>(SearchContext);
   const classes = useStyles();
+  
 
 
 
   return (
     <>
+    <SEO title={`Search results for ${search}`} description="Search for articles" />
       <Header />
       <div className={`search max-margin ${classes.all}`}>
         <h1 className={classes.search}>You searched: {search}</h1>
         <div className={classes.view}>
-          <FeedItemContainer />
+          {searchError ? (
+            <h1>{searchError}!</h1>
+          ) : (
+            <FeedItemContainer />
+          )}
         </div>
       </div>
     </>

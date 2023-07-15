@@ -44,9 +44,10 @@ export const PostProvider = ({ children }:any ) => {
 export const SearchContext = createContext({});
 export const SearchProvider = ({ children }:any ) => {
     const [search, setSearch] = useState("");
+    const [searchError, setSearchError] = useState("");
 
     return (
-        <SearchContext.Provider value={{ search, setSearch }}>
+        <SearchContext.Provider value={{ search, setSearch, searchError, setSearchError }}>
             {children}
         </SearchContext.Provider>
     )

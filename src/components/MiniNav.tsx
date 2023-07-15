@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
 import { useNavigate } from "react-router";
+import { NotVerifiedPopUp } from ".";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context";
 
 const styles = createUseStyles({
   all: {
@@ -12,6 +16,9 @@ const styles = createUseStyles({
   },
   space: {
     height: "70%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   nav: {
     display: "flex",
@@ -39,11 +46,22 @@ const styles = createUseStyles({
 function MiniNav() {
   const classes = styles();
   const navigate = useNavigate();
+  const {user} = useContext<any>(UserContext)
+  const [isVerified, setIsVerified] = useState<boolean>(false);
+  
+  useEffect(() => {
+    if(user) {
+      setIsVerified(user.emailVerified)
+    }
+  }, [user])
+  
+
   
 
   return (
     <div className={classes.all}>
-      <div className={classes.space}></div>
+      <div className={classes.space}>{isVerified ? null : <NotVerifiedPopUp />}
+      </div>
       <div className={classes.nav}>
         <div
           onClick={() => {

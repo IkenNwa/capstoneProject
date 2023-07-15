@@ -8,6 +8,7 @@ import {
   FacebookAuthProvider,
   signOut,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 const provider = new GoogleAuthProvider();
@@ -43,4 +44,5 @@ export {
   signOut,
   createUserWithEmailAndPassword,
   db,
+  sendPasswordResetEmail,
 };

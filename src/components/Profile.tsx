@@ -10,13 +10,14 @@ import { UserContext } from "../context";
 
 const useStyles = createUseStyles({
     profile:{
-        backgroundColor: "#C80028",
+      background: "linear-gradient(210deg, #C80028, #ff3c01)",
+      color: "#FFEFEF",
         width: "40px",
         height: "40px",
         borderRadius: "50%",
         display: "flex",
         fontSize: "25px",
-        color: "white",
+        fontWeight: "bold",
         alignItems: "center",
         justifyContent: "center",
         cursor: "pointer",
@@ -36,7 +37,7 @@ const useStyles = createUseStyles({
             padding: "8px",
             cursor: "pointer",
             "&:hover":{
-              backgroundColor: "#C80028",
+              background: "linear-gradient(210deg, #C80028, #ff3c01)",
               borderRadius: "3px",
               color: "#FFEFEF",
             }

@@ -56,12 +56,12 @@ const styles = createUseStyles({
     "& .delete": {
       width: "100%",
       border: "1px solid #C80028",
-      backgroundColor: "#FFEFEF",
+      background: "#FFEFEF",
       color: "#C80028",
-      "&:hover":{
-        backgroundColor: "#C80028",
+      "&:hover": {
+        background: "linear-gradient(210deg, #C80028, #ff3c01)",
         color: "#FFEFEF",
-      }
+      },
     },
   },
 });

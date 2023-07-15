@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createUseStyles } from "react-jss";
 import { motion } from "framer-motion";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { getRedirectResult, signInWithEmailAndPassword } from "firebase/auth";
+import { getRedirectResult, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config";
 import { UserContext } from "../context";
 import { ChatterLogo, OtherLogin, SEO } from "../components";
@@ -49,16 +49,25 @@ const useStyles = createUseStyles({
         outline: "none",
         padding: "0 1rem",
         margin: "0.5rem 0",
-        backgroundColor: "#C80028",
         color: "#fff",
         fontWeight: "light",
         cursor: "pointer",
       },
-      "& .ptag":{
+      "& .ptag": {
         color: "#C80028",
         fontSize: "12px",
         fontWeight: "bold",
-      }
+      },
+      "& .fPass": {
+        color: "#C80028",
+        fontSize: "12px",
+        fontWeight: "bold",
+        cursor: "pointer",
+        textDecoration: "none",
+        width: "100%",
+        textAlign: "right",
+        margin: "0.5rem 0",
+      },
     },
     "& .divider": {
       display: "flex",
@@ -119,16 +128,16 @@ const useStyles = createUseStyles({
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Login() {
   const { user, setUser } = useContext<any>(UserContext);
+  const navigate = useNavigate();
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
   useEffect(() => {
     setTimeout(() => {
-      setMsg("")
+      setMsg("");
     }, 5000);
-  }, [msg])
-  
+  }, [msg]);
 
   const handleLogin = (e: any) => {
     e.preventDefault();
@@ -143,17 +152,29 @@ function Login() {
         setMsg("Check Your Details...");
       });
   };
-  
-
 
   useEffect(() => {
     getRedirectResult(auth)
       .then((result) => {
+        setMsg("Please Wait...");
         if (result) {
-          setMsg("Please Wait...");
 
           setUser(result.user);
         }
+        //Check to see if email is verified, if not, send verification email
+        if (user) {
+          if (!user.emailVerified) {
+            sendEmailVerification(user)
+              .then(() => {
+                setMsg("Verification Email Sent");
+              }
+              )
+              .catch(() => {
+                setMsg("Error Sending Verification Email");
+              }
+              );
+            }
+          }
       })
       .catch(() => {
         setMsg("Do you have an account!");
@@ -189,7 +210,11 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
               />
-              <button type="submit" onClick={handleLogin}>
+              <p 
+              className="fPass"
+              onClick={() => navigate("/forgotPassword")}
+              >Forgot Password?</p>
+              <button className="btn" type="submit" onClick={handleLogin}>
                 Login
               </button>
               <p className="ptag">
@@ -201,10 +226,7 @@ function Login() {
             </div>
             <OtherLogin />
             <p className="registerLink">
-              Need an account?{" "}
-              <Link to="/register">
-                <span>Register</span>
-              </Link>
+              Need an account? <Link to="/register">Register</Link>
             </p>
           </div>
         </motion.main>

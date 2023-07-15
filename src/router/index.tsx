@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Route, Routes, useLocation, useNavigate } from "react-router";
+import { Route, Routes, useLocation } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { FeedContext, PostContext, SearchContext } from "../context";
@@ -21,11 +21,12 @@ import {
   DashboardFeed,
   Loader,
 } from "../views";
+import FPassword from "../views/FPassword";
 function ChatterRoutes() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const { post, setPost } = useContext<any>(PostContext);
-  const { search, setSearch } = useContext<any>(SearchContext);
+  const { search, setSearch, setSearchError} = useContext<any>(SearchContext);
   const { setFeed } = useContext<any>(FeedContext);
 
   useEffect(() => {
@@ -48,18 +49,17 @@ function ChatterRoutes() {
         if (snapshot.exists()) {
           setPost({ ...snapshot.data(), id: snapshot.id });
           setIsLoading(false);
-        } else {
-          return;
         }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
+        const path = location.pathname.split("/")[2];
+
   //Find posts that match the search query in the url
   useEffect(() => {
     if (location.pathname.includes("search")) {
       setIsLoading(true);
-      const path = location.pathname.split("/")[2];
       setSearch(path);
       const q = collection(db, "posts");
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -70,6 +70,8 @@ function ChatterRoutes() {
             doc.data().author.toLowerCase().includes(search.toLowerCase())
           ) {
             posts.push({ ...doc.data(), id: doc.id });
+          }else{
+            setSearchError("No results found");
           }
           setFeed(posts.reverse());
           setIsLoading(false);
@@ -80,7 +82,7 @@ function ChatterRoutes() {
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+  }, [path]);
 
   return (
     <AnimatePresence>
@@ -91,6 +93,7 @@ function ChatterRoutes() {
           <Route path="/" element={<Landing />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="forgotPassword" element={<FPassword />} />
           <Route path="u/dashboard" element={<Dashboard />}>
             <Route index element={<DashboardFeed />} />
             <Route path="myarticles" element={<MyArticle />} />

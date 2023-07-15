@@ -31,6 +31,7 @@ const useStyles = createUseStyles({
     },
   },
 });
+
 function FeedItemContainer() {
   const classes = useStyles();
   // Fetch all posts from database
@@ -50,18 +51,20 @@ function FeedItemContainer() {
           comments: any;
           uid: string;
         }) => (
-          <FeedItem
-            id={post.id}
-            title={post.title}
-            overview={post.overview}
-            image={post.image}
-            content={post.content}
-            author={post.author}
-            likes={post.likes}
-            key={post.id}
-            comments={post.comments}
-            uid={post.uid}
-          />
+          <>
+            <FeedItem
+              id={post.id}
+              title={post.title}
+              overview={post.overview}
+              image={post.image}
+              content={post.content}
+              author={post.author}
+              likes={post.likes}
+              key={post.id}
+              comments={post.comments}
+              uid={post.uid}
+            />
+          </>
         )
       )}
     </div>

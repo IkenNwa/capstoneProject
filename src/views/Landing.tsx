@@ -18,23 +18,24 @@ const styles = createUseStyles({
     width: "100%",
   },
   about: {
-    backgroundColor: "#C80028",
+    background: "linear-gradient(210deg, #C80028, #ff3c01)",
     color: "#FFEFEF",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginInline: "40px",
+    margin: "40px",
     borderRadius: "50px",
     padding: "2rem",
     height: "fit-content",
     alignItems: "center",
     width: "fit-content",
+    fontSize: "1.2rem",
     "@media (min-width: 768px)": {
       margin: "3rem",
       width: "50%",
       height: "fit-content",
       padding: "3rem",
-
+      fontSize: "1.5rem",
     },
     "& h3": {
       fontSize: "2rem",
@@ -42,7 +43,7 @@ const styles = createUseStyles({
       marginBlockEnd: "1rem",
     },
     "& article": {
-      fontSize: "1.2rem",
+      fontSize: "1rem",
       textAlign: "center",
       lineHeight: "2rem",
     },

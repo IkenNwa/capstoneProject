@@ -42,7 +42,7 @@ const useStyles = createUseStyles({
 
 function Search() {
   const classes = useStyles();
-  const { search, setSearch } = useContext<any>(SearchContext);
+  const { search, setSearch, setSearchError } = useContext<any>(SearchContext);
   const { setFeed } = useContext<any>(FeedContext);
   const navigate = useNavigate();
 
@@ -57,6 +57,8 @@ function Search() {
               doc.data().author.toLowerCase().includes(search.toLowerCase())
             ) {
               posts.push({ ...doc.data(), id: doc.id });
+            }else{
+              setSearchError("No results found");
             }
             setFeed(posts.reverse());
           });

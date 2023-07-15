@@ -57,7 +57,6 @@ const useStyles = createUseStyles({
         outline: "none",
         padding: "0 1rem",
         margin: "0.5rem 0",
-        backgroundColor: "#C80028",
         color: "#fff",
         fontWeight: "light",
         cursor: "pointer",
@@ -187,7 +186,7 @@ function Register() {
                 value={cPassword}
                 onChange={(e) => setCPassword(e.target.value)}
               />
-              <button type="submit" onClick={emailLogin}>
+              <button className="btn" type="submit" onClick={emailLogin}>
                 Register
               </button>
             </form>

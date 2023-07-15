@@ -25,6 +25,7 @@ import SMInteractions from "./SmallInteractions";
 import UserBanner from "./UserBanner";
 import Viewer from "./Viewer";
 import WriterInfo from "./WriterInfo";
+import NotVerifiedPopUp from "./NotVerifiedPopUp";
 
 export {
     AddImage,
@@ -53,4 +54,5 @@ export {
     UserBanner,
     Viewer,
     WriterInfo,
+    NotVerifiedPopUp,
 }

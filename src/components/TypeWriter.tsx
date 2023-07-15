@@ -15,8 +15,13 @@ const useStyles = createUseStyles({
     },
   },
   bold: {
-    color: "#C80028",
+    color: "#FFF",
     fontWeight: "bold",
+    background: "linear-gradient(210deg, #C80028, #ff3c01)",
+    backgroundClip: "text",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    
   },
 });
 

@@ -66,7 +66,7 @@ body {
 }
 
 .btn {
-  background-color: #C80028;
+  background: linear-gradient(210deg, #C80028, #ff3c01);;
   color: white;
   padding-inline: 10px;
   width: fit-content;
